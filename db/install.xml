@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="auth/wsetsso/db" VERSION="20151216" COMMENT="XMLDB file for Moodle auth/wsetsso"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="auth_wsetsso_token" COMMENT="Contains SSO tokens for auth_wsetsso">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="User id"/>
+        <FIELD NAME="token" TYPE="char" LENGTH="40" NOTNULL="true" SEQUENCE="false" COMMENT="sha1 token"/>
+        <FIELD NAME="timeupdated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Time token was last updated/reset"/>
+        <FIELD NAME="ip" TYPE="char" LENGTH="50" NOTNULL="true" SEQUENCE="false" COMMENT="remote ip address"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="token" UNIQUE="false" FIELDS="token"/>
+        <INDEX NAME="token_ip" UNIQUE="false" FIELDS="token, ip" COMMENT="Search on both token and ip"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>

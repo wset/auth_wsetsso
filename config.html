@@ -1,0 +1,47 @@
+<?php
+    // Set to defaults if undefined.
+    if (!isset($config->endpointurl)) {
+        $config->endpointurl = 'http://my.moodle.com/auth/wsetsso/wsetcms/index.php';
+    }
+    if (!isset($config->logouturl)) {
+        $config->logouturl = '';
+    }
+    if (!isset($config->enrolcohort)) {
+        $config->enrolcohort = 'moodle_enrols';
+    }
+?>
+<table cellspacing="0" cellpadding="5" border="0" class="table">
+    <tr>
+        <td align="right">
+            <label for="endpointurl">
+                <?php print_string('endpointurl', 'auth_wsetsso') ?>
+            </label>
+        </td>
+        <td>
+            <input type="text" name="endpointurl" value="<?php echo $config->endpointurl ?>" size="40"/>
+        </td>
+        <td><?php print_string('endpointurl_desc', 'auth_wsetsso') ?></td>
+    </tr>
+    <tr>
+        <td align="right">
+            <label for="logouturl">
+                <?php print_string('logouturl', 'auth_wsetsso') ?>
+            </label>
+        </td>
+        <td>
+            <input type="text" name="logouturl" value="<?php echo $config->logouturl ?>" size="40"/>
+        </td>
+        <td><?php print_string('logouturl_desc', 'auth_wsetsso') ?></td>
+    </tr>
+    <tr>
+        <td align="right">
+            <label for="enrolcohort">
+                <?php print_string('enrolcohort', 'auth_wsetsso') ?>
+            </label>
+        </td>
+        <td>
+            <input type="text" name="enrolcohort" value="<?php echo $config->enrolcohort ?>" />
+        </td>
+        <td><?php print_string('enrolcohort_desc', 'auth_wsetsso') ?></td>
+    </tr>
+</table>
