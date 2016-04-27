@@ -25,11 +25,19 @@ defined('MOODLE_INTERNAL') || die();
 class auth_wsetsso_renderer extends plugin_renderer_base {
 
     public function jquerybutton($endpointurl, $token) {
+        $url = $endpointurl.'?token='.$token;
+        
         echo '<script>';
         echo "$(document).ready(function(e) {";
-        echo "    window.top.location.href = '{$endpointurl}?token={$token}';";
+        echo "    window.top.location.href = '{$url}';";
         echo "});";
         echo "</script>";
+        
+        $message = get_string('pageshouldredirect');
+        
+        echo $this->notification($message, 'redirectmessage');
+        echo '<div class="continuebutton"><a href="'.$url.'" target="_top">' . get_string('continue') . '</div>';
+        
     }
 
 }
