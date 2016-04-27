@@ -34,6 +34,7 @@ $PAGE->set_pagelayout('login');
 $PAGE->set_title(get_string('logintitle', 'auth_wsetsso'));
 $PAGE->set_heading(get_string('loginheading', 'auth_wsetsso'));
 $PAGE->requires->jquery();
+$PAGE->add_body_class('wsetsso');
 
 $output = $PAGE->get_renderer('auth_wsetsso');
 
