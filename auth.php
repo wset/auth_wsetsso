@@ -56,6 +56,11 @@ class auth_plugin_wsetsso extends auth_plugin_base {
 
             // add class to login page (maybe)
             $PAGE->add_body_class('wsetsso');
+            if (isloggedin() and !isguestuser()) {
+                // if user is already logged in redirect straight to token generation.
+                redirect($url);
+            }
+            
         }
     }
 
