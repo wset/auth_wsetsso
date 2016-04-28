@@ -28,8 +28,8 @@ require_login();
 
 $context = context_system::instance();
 $PAGE->set_context($context);
-$url = new moodle_url('/auth/wsetsso/login.php');
-$PAGE->set_url($url);
+$PAGE->https_required();
+$PAGE->set_url("$CFG->httpswwwroot/auth/wsetsso/login.php");
 $PAGE->set_pagelayout('login');
 $PAGE->set_title(get_string('logintitle', 'auth_wsetsso'));
 $PAGE->set_heading(get_string('loginheading', 'auth_wsetsso'));
