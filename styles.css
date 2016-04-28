@@ -1,0 +1,10 @@
+/**
+ * WSET SSO Auth
+ */
+.wsetsso .navbar, .wsetsso #page-header, .wsetsso #page-footer {
+    display: none;
+}
+
+.wsetsso, .wsetsso #region-main  {
+    padding: 0;
+}
