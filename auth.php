@@ -46,13 +46,29 @@ class auth_plugin_wsetsso extends auth_plugin_base {
         global $CFG;
         global $SESSION;
         global $PAGE;
-        
+
         // Param 'wsetsso' must be '1' so we know this is an SSO login
         $wsetsso = optional_param('wsetsso', 0, PARAM_INT);
+        $ssotheme = get_config('auth_wsetsso')->ssotheme;
         if ($wsetsso) {
             $url = $CFG->httpswwwroot . '/auth/wsetsso/login.php';
             $SESSION->wantsurl = $url;
             $SESSION->wsetsso = true;
+
+            // Change session theme for SSO.
+            if(!empty($ssotheme)) {
+                try {
+                    $themeconfig = theme_config::load($ssotheme);
+                    // Makes sure the theme can be loaded without errors.
+                    if ($themeconfig->name === $ssotheme) {
+                        $SESSION->theme = $ssotheme;
+                    }
+                    unset($themeconfig);
+                    unset($ssotheme);
+                } catch (Exception $e) {
+                    debugging('Failed to set the theme from the URL.', DEBUG_DEVELOPER, $e->getTrace());
+                }
+            }
 
             // add class to login page (maybe)
             $PAGE->add_body_class('wsetsso');
@@ -60,7 +76,9 @@ class auth_plugin_wsetsso extends auth_plugin_base {
                 // if user is already logged in redirect straight to token generation.
                 redirect($url);
             }
-            
+        } else if ($SESSION->theme === $ssotheme) {
+            // if we're not using the SSO unset the sso session theme.
+            unset($SESSION->theme);
         }
     }
 
@@ -172,11 +190,15 @@ class auth_plugin_wsetsso extends auth_plugin_base {
         if (!isset($config->enrolcohort)) {
             $config->enrolcohort = 'moodle_enrols';
         }
+        if (!isset($config->ssotheme)) {
+            $config->ssotheme = '';
+        }
 
         // Save settings.
         set_config('endpointurl', $config->endpointurl, 'auth_wsetsso');
         set_config('logouturl', $config->logouturl, 'auth_wsetsso');
         set_config('enrolcohort', $config->enrolcohort, 'auth_wsetsso');
+        set_config('ssotheme', $config->ssotheme, 'auth_wsetsso');
         return true;
     }
 }

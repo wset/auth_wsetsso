@@ -9,6 +9,9 @@
     if (!isset($config->enrolcohort)) {
         $config->enrolcohort = 'moodle_enrols';
     }
+    if (!isset($config->ssotheme)) {
+        $config->ssotheme = '';
+    }
 ?>
 <table cellspacing="0" cellpadding="5" border="0" class="table">
     <tr>
@@ -43,5 +46,16 @@
             <input type="text" name="enrolcohort" value="<?php echo $config->enrolcohort ?>" />
         </td>
         <td><?php print_string('enrolcohort_desc', 'auth_wsetsso') ?></td>
+    </tr>
+        <tr>
+        <td align="right">
+            <label for="ssotheme">
+                <?php print_string('ssotheme', 'auth_wsetsso') ?>
+            </label>
+        </td>
+        <td>
+            <input type="text" name="ssotheme" value="<?php echo $config->ssotheme ?>" />
+        </td>
+        <td><?php print_string('ssotheme_desc', 'auth_wsetsso') ?></td>
     </tr>
 </table>

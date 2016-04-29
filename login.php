@@ -47,6 +47,9 @@ echo $OUTPUT->header();
 // if we got here then can generate a new token
 $token = auth_wsetsso_createtoken();
 
+// unset any session theme previously set
+unset($SESSION->theme);
+
 //echo $output->loginmessage();
 echo $output->jquerybutton($config->endpointurl, $token);
 echo $OUTPUT->footer();

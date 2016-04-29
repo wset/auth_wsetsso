@@ -32,3 +32,5 @@ $string['logouturl_desc'] = 'URL to redirect to after Moodle logout';
 $string['loginheading'] = 'WSET SSO Login Page';
 $string['logintitle'] = 'WSET SSO Login Page';
 $string['pluginname'] = 'WSET SSO';
+$string['ssotheme'] = 'SSO Theme';
+$string['ssotheme_desc'] = 'Theme to use for SSO pages';
