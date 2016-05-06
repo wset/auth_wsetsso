@@ -24,12 +24,26 @@ defined('MOODLE_INTERNAL') || die();
 
 class auth_wsetsso_renderer extends plugin_renderer_base {
 
-    public function jquerybutton($endpointurl, $token) {
+    public function jquerybutton($endpointurl, $token, $skip) {
+        global $CFG;
         $url = $endpointurl.'?token='.$token;
 
         echo '<script>';
         echo "$(document).ready(function(e) {";
-        echo "    window.top.location.href = '{$url}';";
+        if($skip == 1) {
+            $config = get_config('auth_wsetsso');
+            echo "    window.addEventListener(\"message\", receivemessage, false);";
+            echo "";
+            echo "    function receivemessage(event)";
+            echo "    {";
+            echo "        var origin = event.origin || event.originalEvent.origin;"; // For Chrome, the origin property is in the event.originalEvent object.
+            echo "        if (origin == \"".$config->messageoriginurl."\")";
+            echo "          window.top.location.href = '{$url}&redirUrl=' + event.data;";
+            echo "    }";
+        }
+        else {
+            echo "         window.top.location.href = '{$url}';";
+        }
         echo "});";
         echo "</script>";
 

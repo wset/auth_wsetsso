@@ -25,6 +25,7 @@ require(dirname(__FILE__) . '/locallib.php');
 
 require_login();
 
+$skipped = optional_param('skipped', 0, PARAM_INT);
 
 $context = context_system::instance();
 $PAGE->set_context($context);
@@ -51,7 +52,7 @@ $token = auth_wsetsso_createtoken();
 unset($SESSION->theme);
 
 //echo $output->loginmessage();
-echo $output->jquerybutton($config->endpointurl, $token);
+echo $output->jquerybutton($config->endpointurl, $token, $skipped);
 echo $OUTPUT->footer();
 
 

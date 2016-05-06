@@ -74,7 +74,7 @@ class auth_plugin_wsetsso extends auth_plugin_base {
             $PAGE->add_body_class('wsetsso');
             if (isloggedin() and !isguestuser()) {
                 // if user is already logged in redirect straight to token generation.
-                redirect($url);
+                redirect($url."?skipped=1");
             }
         } else if (isset($SESSION->theme) && $SESSION->theme === $ssotheme) {
             // if we're not using the SSO unset the sso session theme.
@@ -198,6 +198,7 @@ class auth_plugin_wsetsso extends auth_plugin_base {
         set_config('endpointurl', $config->endpointurl, 'auth_wsetsso');
         set_config('logouturl', $config->logouturl, 'auth_wsetsso');
         set_config('enrolcohort', $config->enrolcohort, 'auth_wsetsso');
+        set_config('messageoriginurl', $config->messageoriginurl, 'auth_wsetsso');
         set_config('ssotheme', $config->ssotheme, 'auth_wsetsso');
         return true;
     }

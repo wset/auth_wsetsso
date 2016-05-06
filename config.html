@@ -6,6 +6,9 @@
     if (!isset($config->logouturl)) {
         $config->logouturl = '';
     }
+    if (!isset($config->messageoriginurl)) {
+        $config->messageoriginurl = 'http://my.website.com';
+    }
     if (!isset($config->enrolcohort)) {
         $config->enrolcohort = 'moodle_enrols';
     }
@@ -38,6 +41,17 @@
     </tr>
     <tr>
         <td align="right">
+            <label for="messageoriginurl">
+                <?php print_string('messageoriginurl', 'auth_wsetsso') ?>
+            </label>
+        </td>
+        <td>
+            <input type="text" name="messageoriginurl" value="<?php echo $config->messageoriginurl ?>" />
+        </td>
+        <td><?php print_string('messageoriginurl_desc', 'auth_wsetsso') ?></td>
+    </tr>
+    <tr>
+        <td align="right">
             <label for="enrolcohort">
                 <?php print_string('enrolcohort', 'auth_wsetsso') ?>
             </label>
@@ -58,4 +72,5 @@
         </td>
         <td><?php print_string('ssotheme_desc', 'auth_wsetsso') ?></td>
     </tr>
+
 </table>
