@@ -76,7 +76,7 @@ class auth_plugin_wsetsso extends auth_plugin_base {
                 // if user is already logged in redirect straight to token generation.
                 redirect($url);
             }
-        } else if ($SESSION->theme === $ssotheme) {
+        } else if (isset($SESSION->theme) && $SESSION->theme === $ssotheme) {
             // if we're not using the SSO unset the sso session theme.
             unset($SESSION->theme);
         }
