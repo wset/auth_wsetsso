@@ -50,7 +50,7 @@ class auth_plugin_wsetsso extends auth_plugin_base {
         // Param 'wsetsso' must be '1' so we know this is an SSO login
         $wsetsso = optional_param('wsetsso', 0, PARAM_INT);
         $ssotheme = get_config('auth_wsetsso')->ssotheme;
-        if ($wsetsso) {
+        if ($wsetsso || (isset($SESSION->wsetsso) && $SESSION->wsetsso) ) {
             $url = $CFG->httpswwwroot . '/auth/wsetsso/login.php';
             $SESSION->wantsurl = $url;
             $SESSION->wsetsso = true;
