@@ -40,20 +40,10 @@ class auth_wsetsso_renderer extends plugin_renderer_base {
             echo "        if (origin == \"".$config->messageoriginurl."\")";
             echo "          window.top.location.href = '{$url}&redirUrl=' + event.data;";
             echo "    }";
-            echo "";
-            echo "    if(window.self == window.top)";
-            echo "    {";
-            echo "         window.top.location.href = '{$CFG->wwwroot}';";
-            echo "    }";
         }
         else {
-            echo "    if(window.self == window.top)";
-            echo "    {";
-            echo "         window.top.location.href = '{$CFG->wwwroot}';";
-            echo "    }";
-            echo "    else {";
-            echo "         window.top.location.href = '{$url}';";
-            echo "    }";
+            echo "    window.top.location.href = '{$url}';";
+
         }
         echo "});";
         echo "</script>";
